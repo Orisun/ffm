@@ -44,8 +44,8 @@ if __name__ == '__main__':
     valid_file = "valid.txt"
     model_file = "ffm.npy"
     # 超参数
-    eta = 0.05
-    lambd = 1e-3
+    eta = 0.01
+    lambd = 1e-2
     max_echo = 30
     max_r2 = 0.9
 

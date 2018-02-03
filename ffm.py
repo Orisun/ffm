@@ -43,7 +43,7 @@ class FFM(object):
         self.lambd = lambd
         # 初始化三维权重矩阵w~U(0,1/sqrt(k))
         self.w = np.random.rand(n, m, k) / math.sqrt(k)
-        # 初始化累积梯度平方和为1，AdaGrad时要用到
+        # 初始化累积梯度平方和为，AdaGrad时要用到，防止除0异常
         self.G = np.ones(shape=(n, m, k), dtype=np.float64)
         self.log = Logistic()
 
@@ -112,7 +112,7 @@ class FFM(object):
     def train(self, sample_generator, max_echo, max_r2):
         '''
         根据一堆样本训练模型
-        :param sample_generator: 样本生成器，每次yield (node_list, y)，node_list中存储的是x的非0值。x要事先做好归一化，即模长为1
+        :param sample_generator: 样本生成器，每次yield (node_list, y)，node_list中存储的是x的非0值。通常x要事先做好归一化，即模长为1，这样精度会略微高一点
         :param max_echo: 最大迭代次数
         :param max_r2: 拟合系数r2达到阈值时即可终止学习
         :return:
